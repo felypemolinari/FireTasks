@@ -6,10 +6,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class TaskViewModel : ViewModel() {
-    // Inicializa o Firestore
     private val db = FirebaseFirestore.getInstance()
 
-    // Estado da lista de tarefas (Flow para atualização em tempo real)
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
     val tasks: StateFlow<List<Task>> = _tasks
 

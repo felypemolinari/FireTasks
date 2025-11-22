@@ -14,9 +14,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun FireTasksScreen(viewModel: TaskViewModel = viewModel()) {
-    // Coleta o estado da lista de tarefas
+    // coleta o estado da lista de tarefas
     val tasks by viewModel.tasks.collectAsState()
-    // Estado local para o campo de texto
+    // estado local para o campo de texto
     var text by remember { mutableStateOf("") }
 
     Column(
@@ -30,7 +30,6 @@ fun FireTasksScreen(viewModel: TaskViewModel = viewModel()) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // Área de Inserção (Input)
         Row(verticalAlignment = Alignment.CenterVertically) {
             OutlinedTextField(
                 value = text,
@@ -43,7 +42,7 @@ fun FireTasksScreen(viewModel: TaskViewModel = viewModel()) {
             Button(onClick = {
                 if (text.isNotBlank()) {
                     viewModel.addTask(text)
-                    text = "" // Limpa o campo
+                    text = "" // limpa o campo
                 }
             }) {
                 Text("Add")
@@ -52,7 +51,7 @@ fun FireTasksScreen(viewModel: TaskViewModel = viewModel()) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Lista de Tarefas (LazyColumn)
+        // lista de tarefas (LazyColumn)
         LazyColumn {
             items(tasks) { task ->
                 TaskItem(
@@ -89,7 +88,6 @@ fun TaskItem(task: Task, onToggle: () -> Unit, onDelete: () -> Unit) {
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp),
-                // Opcional: Riscar o texto se concluído
                 style = if (task.isCompleted)
                     MaterialTheme.typography.bodyLarge.copy(textDecoration = androidx.compose.ui.text.style.TextDecoration.LineThrough)
                 else
